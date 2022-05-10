@@ -3,7 +3,7 @@ require 'pg'
 
 class Bookmark
   def self.see
-      con = PG.connect :dbname => 'bookmark_manager'
+      con = PG.connect :dbname => 'bookmark-manager'
 
       rs = con.exec "SELECT * FROM bookmarks;"
 
