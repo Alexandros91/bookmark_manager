@@ -9,7 +9,17 @@ class BookmarkManager < Sinatra::Base
 
   get '/bookmarks' do
     @bookmarks = Bookmark.see
-    erb :'bookmarks/index'
+    erb :index
+  end
+
+  get '/add_bookmark' do
+    erb :add_bookmark
+  end
+
+  # Need to get title and url into database.
+  post '/entry' do
+    @title = params[:entry_title]
+    @url = params[:entry_url]
   end
 
   run! if app_file == $0
