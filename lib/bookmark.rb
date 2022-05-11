@@ -12,7 +12,7 @@ class Bookmark
     rs = con.exec "SELECT * FROM bookmarks;"
 
       rs.map do |bookmark| #bookmark = {"id"=>"1", "url"=>"http://makers.tech"}
-        bookmark['url']
+        { bookmark['title'] => bookmark['url'] }
       end
   end
 end 
