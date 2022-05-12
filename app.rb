@@ -9,17 +9,21 @@ class BookmarkManager < Sinatra::Base
 
   get '/bookmarks' do
     @bookmarks = Bookmark.see
-    erb :index
+    erb :"bookmarks/index"
   end
 
-  get '/add_bookmark' do
-    erb :add_bookmark
+  get '/bookmarks/new' do
+    erb :"bookmarks/new"
   end
 
   # Need to get title and url into database.
-  post '/entry' do
-    @title = params[:entry_title]
-    @url = params[:entry_url]
+  post '/bookmarks' do
+    url = params['url']
+    connection = PG.connect(dbname: 'bookmark_manager_test')
+    connection.exec("INSERT INTO bookmarks (url) VALUES('#{url}')")
+    redirect '/bookmarks'  
+  # @title = params[:entry_title]
+    # @url = params[:entry_url]
   end
 
   run! if app_file == $0
