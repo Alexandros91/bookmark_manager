@@ -18,9 +18,7 @@ class BookmarkManager < Sinatra::Base
 
   # Need to get title and url into database.
   post '/bookmarks' do
-    url = params['url']
-    connection = PG.connect(dbname: 'bookmark_manager_test')
-    connection.exec("INSERT INTO bookmarks (url) VALUES('#{url}')")
+    Bookmark.create(url: params[:url])
     redirect '/bookmarks'  
   # @title = params[:entry_title]
     # @url = params[:entry_url]
